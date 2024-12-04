@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      生成AI on Mac(Apple silicon) - Apple siliconは機械学習の夢を見るか
+      2024年版
+    </title>
+    <meta
+      property="og:title"
+      content="生成AI on Mac(Apple silicon) - Apple siliconは機械学習の夢を見るか 2024年版"
+    />
+    <meta
+      property="og:description"
+      content="去年の記事から早くも一年が経ちました。こちらApple siliconユーザーより、近況をお届けします。"
+    />
+    <meta
+      property="og:url"
+      content="https://kaeru-shigure.github.io/ac20241205/"
+    />
+    <meta
+      property="og:image"
+      content="https://kaeru-shigure.github.io/ac20241205/assets/ogp_c.png"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="kaeru-shigure.github.io" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="生成AI on Mac(Apple silicon) - Apple siliconは機械学習の夢を見るか 2024年版"
+    />
+    <script>
+      if (Math.random() < 0.2) {
+        document.documentElement.classList.add("cddaf79");
+      }
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700;800&family=PT+Sans:wght@400;700&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        color: #f0f0f0;
+        font-family: "PT Sans", "IBM Plex Sans JP", sans-serif;
+      }
+      body {
+        background-color: #000;
+        --article-width: 800px;
+        line-height: 1.5;
+      }
+      article {
+        padding-bottom: 30px;
+      }
+      article h1,
+      article h2,
+      article h3 {
+        font-weight: bold;
+        color: #fff;
+      }
+      article > header {
+        background-image: url("assets/cddaf79_aa31b7a2f460c27d6d296fcaab30c29dde68e034.webp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+      }
+      .cddaf79 article > header {
+        background-image: url("assets/cddaf79_0f98b59a1aa61ebd52a13fbdfad411faf7d8a494.webp");
+      }
+      article > header .wlimit_container {
+        max-width: var(--article-width);
+        padding: 10px 0;
+        margin: 0 auto;
+        height: 35vw;
+        display: flex;
+        align-items: flex-end;
+      }
+      article > header .wlimit_contents {
+        padding: 0.25em;
+        line-height: 1.3;
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(3px);
+      }
+      article > header h1 {
+        font-size: 2.5em;
+      }
+      article h2 {
+        font-size: 2em;
+      }
+      article h3 {
+        font-size: 1.3em;
+      }
+      article > section,
+      article > footer {
+        max-width: var(--article-width);
+        margin: 0 auto;
+        padding: 0 10px;
+        padding-top: 30px;
+      }
+      article > footer {
+        color: #777;
+      }
+      article > footer > a {
+        text-decoration: none;
+      }
+      article > section > h3 {
+        padding-top: 15px;
+      }
+      article ul {
+        list-style-type: none;
+        padding-left: 20px;
+      }
+      article li {
+        position: relative;
+      }
+      article li:before {
+        content: "-";
+        position: absolute;
+        top: 0;
+        left: -15px;
+        color: #0cf;
+      }
+      a {
+        color: inherit;
+      }
+      section > img {
+        display: block;
+        max-width: 100%;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <header>
+        <div class="wlimit_container">
+          <div class="wlimit_contents">
+            <h1>生成AI on Mac(Apple silicon)</h1>
+            <p>Apple siliconは機械学習の夢を見るか 2024年版</p>
+          </div>
+        </div>
+      </header>
+      <section>
+        <p>
+          <a href="https://kaeru-shigure.github.io/ac20231207/">去年の記事</a
+          >から早くも一年が経ちました。 こちらApple
+          siliconユーザーより、近況をお届けします。
+        </p>
+      </section>
+      <section>
+        <h2>TL;DR</h2>
+        <ul>
+          <li>
+            mlxが登場してtorchを捨てる選択肢を取れるようになったので、mlxに移植する筋力があればmlxで不具合少なめ最高になれます
+          </li>
+          <li>
+            あと、torch自体も一年前に比べれば、やっとautocastが実装されたりバグが減ったりと改善しているので、環境全体として諸々改善していきている感触があります
+          </li>
+          <li>
+            とはいえCUDAが使えるNVIDIAのVRAM大量にあるGPU積んだWindows機を用意すれば色々苦労せずに済んで楽なのは相変わらずです
+          </li>
+          <li>
+            結局詰まるポイントはどうしてもあるので、忙しくて時間無い人にはやはりオススメできない
+          </li>
+          <li>ご家庭のMacbookがある人はちょっと触ってみると楽しいかも</li>
+        </ul>
+        <h3>嬉しいこと</h3>
+        <ul>
+          <li>ワッパ最強ぽいこと。電気代うれしい</li>
+          <li>Unified memoryのおかげでRAM=VRAMなこと</li>
+        </ul>
+        <h3>つらいこと</h3>
+        <ul>
+          <li>
+            <s>pytorch on mps(Apple silicon GPU Metal Shader) がバグだらけ</s>
+            -&gt;
+            それなりに改善されました。とはいえ一部非対応APIがあったりするのはやはり非CUDAと言ったところ
+          </li>
+          <li>
+            CUDAないとだめで〜すが余りにも多い(変わらず)
+            <ul>
+              <li>Apple siliconに限らないけど、とにかくCUDA以外の人権が無い</li>
+            </ul>
+          </li>
+          <li>
+            CUDA環境に比べて速度が1/8とかで遅い(変わらず)
+            <ul>
+              <li>その分ワッパはいいよ</li>
+              <li>あとmlxに移植すれば多少速くなります</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>ANE(Apple Neural Engine)どうなの?</h2>
+        <ul>
+          <li>去年と状況あんま変わってないです。相変わらず扱いづらい</li>
+          <li>
+            ただ基本使われずに眠っているので、裏で小さいモデルを回す(CoreML)のにちょうど良い時もあります。スモールモデルで精度を求めず、裏で回したい時にどうぞ
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>mlxってどうなの?</h2>
+        <ul>
+          <li>
+            unified memoryとか、Apple
+            siliconの嬉しさを最大限に活かすために作られたライブラリです。jaxのApple
+            silicon版といえばわかりやすいでしょうか。torchよりパフォーマンス出る傾向があります
+          </li>
+          <li>
+            バグが無い訳では無いけど、torchに比べて稀に〜程度だし、報告すればすぐ修正されるので精神的に辛くない
+          </li>
+          <li>
+            推論は文句なしだけど、学習についてはメモリ消費がtorchに比べてなんか多いのが気になりはします
+          </li>
+          <li>
+            fp32以外がちょい精度悪かったりfp64が使えなかったりするので、精度が無いとうまく動作しないものとは相性が悪いです
+            <ul>
+              <li>
+                <a href="https://github.com/ml-explore/mlx/issues/488"
+                  >[Feature] More accurate reductions for low precision types
+                  #488</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h3>その他mlxに関する個人的なお話</h3>
+        <ul>
+          <li>
+            mlxには最低限のsdxl実装しかありません。FreeU乗せるぐらいはできたものの、v-predictionとかKSamplerとかやり始めると追加実装ではかなり厳しい。最近はComfyの処理を頑張って移植する作業をコツコツ進めています。やっと欲しい機能が整ってきたところ。ついでに、ちょい工夫して速度を犠牲にディスクオフロードしながらfp16モデルをmax1.8GBぐらいのram消費で走らせるようにしていたりします。それでも速度まぁまぁ出るのがApple
+            siliconのいいところ
+          </li>
+          <li>
+            ちなみに、記事ヘッダはそのmlx移植sdxlでちょい細工したサンプラーを用いるなど、去年の記事の設定に近い構成にした別モデルで生成したものです
+            <ul>
+              <li>
+                ※スタイリングの目的であえて粗い描写にしているので、これは精度問題とは関係ないです
+              </li>
+            </ul>
+          </li>
+          <li>
+            mlxなら割と学習頑張れば回りそうなので、Mac
+            Mini買いたくなりました。ただまぁやっぱり高いよね。なんか雑所得で副業したい
+          </li>
+        </ul>
+        <img src="assets/kaerulowram.webp" />
+      </section>
+      <footer><a href="/">kaeru</a> - 2024-12-05</footer>
+    </article>
+  </body>
+</html>
